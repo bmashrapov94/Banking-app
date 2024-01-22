@@ -1,0 +1,31 @@
+{
+  "lastID": "0000018",
+  "0000001": {
+    "accountType": "Savings",
+    "accountBalance": 1194.33
+  },
+  "0000008": {
+    "accountType": "Chequing",
+    "accountBalance": 555.66
+  },
+  "0000010": {
+    "accountType": "Savings",
+    "accountBalance": 5050.5
+  },
+  "0000015": {
+    "accountType": "Chequing",
+    "accountBalance": 0
+  },
+  "0000016": {
+    "accountType": "Chequing",
+    "accountBalance": 500
+  },
+  "0000017": {
+    "accountType": "Chequing",
+    "accountBalance": 0
+  },
+  "0000018": {
+    "accountType": "Savings",
+    "accountBalance": 500
+  }
+}

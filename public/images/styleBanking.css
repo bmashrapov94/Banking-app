@@ -1,0 +1,156 @@
+/* header */
+header 
+{
+    text-align: center;
+    font-size: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+}
+
+header img 
+{
+    display: block;
+    margin: 0 auto;
+}
+
+/* Add styles for the navigation menu */
+nav 
+{
+    background-color: #007BFF;
+    color: #fff;
+    text-align: center;
+}
+
+nav ul 
+{
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li 
+{
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a 
+{
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+/* Display the Logout link when hovering on the username */
+p #logout-link 
+{
+    display: none;
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+p:hover #logout-link 
+{
+    display: inline;
+}
+
+/* main content */
+p 
+{
+    text-align: center;
+    font-size: 18px;
+    margin: 20px;
+    margin-top: 10px; 
+}
+
+/* account section */
+.account-section 
+{
+    text-align: center;
+    margin: 20px;
+}
+
+.account-section p 
+{
+    margin: 5px;
+}
+
+.account-section label, .account-section select, .account-section input[type=text], .account-section button 
+{
+    margin: 5px;
+    padding: 8px;
+}
+
+
+input[type="radio"], select 
+{
+    margin-right: 10px;
+}
+
+/* logout button and action buttons */
+button, a[href="/logout"] 
+{
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none; 
+}
+
+button:hover, a[href="/logout"]:hover 
+{
+    background-color: #218838;
+}
+
+/* Tooltip for logout */
+a[href="/logout"]:hover:after 
+{
+    content: "Log Out";
+    position: absolute;
+    background: #333;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+p > a[href="/logout"]:hover 
+{
+    color: transparent;
+}
+
+
+input[type='text'], select 
+{
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+
+#submit-button 
+{
+    background-color: #007bff;
+}
+
+#submit-button:hover 
+{
+    background-color: #0069d9;
+}
+
+.error-message 
+{
+    color: red;
+    
+}
+
+.input-error 
+{
+    border: 1px solid red;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--Student name: Bektursun Mashrapov-->
+<!--Student ID: 140309220-->
+<!--Student email: bmashrapov@myseneca.ca-->
+<!--Course: WEB322-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/public/styleWithdrawal.css">
+    <title>Web Bank Withdrawal Page</title>
+</head>
+<body>
+    <header>
+        <img src="/public/images/webBankLogo.png" alt="Web Bank Logo">
+        <h1>Withdraw from Your Web Bank Account</h1>
+    </header>
+    <p>Welcome, {{ username }}!</p>
+
+    {{#if withdrawalSuccessMessage}}
+    <div class="success-message">
+        <p>{{ withdrawalSuccessMessage }}</p>
+    </div>
+    {{/if}}
+
+    {{#if errorMessage}}
+    <div class="error-message">
+        <p>{{ errorMessage }}</p>
+    </div>
+    {{/if}}
+
+    <section class="withdrawal-section">
+        <h2>Your Account Withdrawal:</h2>
+
+        <!-- Dropdown for Account Number Selection -->
+        <label for="accountNumber">Select Account:</label>
+        <select name="accountNumber" id="accountNumber">
+            {{#each accounts}}
+                <option value="{{this.number}}">{{this.type}} - {{this.number}}</option>
+            {{/each}}
+        </select>
+
+        <form action="/withdrawal" method="post">
+            <input type="hidden" name="accountNumber" value="{{ accountNumber }}">
+            <label for="withdrawalAmount">Enter withdrawal amount:</label>
+            <input type="text" id="withdrawalAmount" name="withdrawalAmount" placeholder="Enter amount" required>
+            <button type="submit">Withdraw</button>
+            <button type="button" onclick="cancelWithdrawal()">Cancel</button> 
+        </form>
+        <form action="/main" method="get">
+            <button type="submit">Return to Banking</button>
+        </form>
+        
+        {{#if insufficientFundsMessage}} 
+        <div class="error-message">
+            <p>{{ insufficientFundsMessage }}</p>
+        </div>
+        {{/if}}
+    </section>
+
+    <script>
+        function cancelWithdrawal() 
+        { 
+            window.location.href = '/main';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--Student name : Bektursun Mashrapov   -->
+<!--Student ID   : 140309220             -->
+<!--Student email: bmashrapov@myseneca.ca-->
+<!--Course       : WEB322                -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/public/styleBalance.css">
+    <title>Web Bank Balance Page</title>
+</head>
+<body>
+    <header>
+        <img src="/public/images/webBankLogo.png" alt="Web Bank Logo">
+        <h1>Balance page of your Web Bank account</h1>
+    </header>
+    <p>Welcome, {{ username }}!</p>
+    <section class="balance-section">
+        <h2>Your Account Balance:</h2>
+
+        <!-- Dropdown for Account Number Selection -->
+        <label for="accountNumber">Select Account:</label>
+        <select name="accountNumber" id="accountNumber">
+            {{#each accounts}}
+                <option value="{{this.number}}">{{this.type}} - {{this.number}}</option>
+            {{/each}}
+        </select>
+
+        <p>Account Type: {{ accountType }}</p>
+        <p>Current Balance: $ {{ balanceData }}</p> 
+        <form action="/main" method="get">
+            <button type="submit">Return to Banking</button>
+        </form>
+    </section>
+</body>
+</html>

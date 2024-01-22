@@ -1,0 +1,78 @@
+/* header */
+header 
+{
+    text-align: center;
+    font-size: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+}
+
+header img 
+{
+    display: block;
+    margin: 0 auto;
+}
+
+/* main content */
+p 
+{
+    text-align: center;
+    font-size: 18px;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+/* deposit section */
+.deposit-section 
+{
+    text-align: center;
+    margin: 20px;
+}
+
+/* Increase the font size for better visibility */
+.deposit-section h2, .deposit-section label 
+{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+form 
+{
+    text-align: center;
+    margin: 20px;
+}
+
+label 
+{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Adjust the width of the input field as needed */
+input 
+{
+    width: 100%; 
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button 
+{
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover 
+{
+    background-color: #0056b3;
+}
+
+

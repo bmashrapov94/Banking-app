@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!-- Student name: Bektursun Mashrapov -->
+<!-- Student ID: 140309220 -->
+<!-- Student email: bmashrapov@myseneca.ca -->
+<!-- Course: WEB322 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/public/styleBanking.css">
+    <title>Web Bank Main Page</title>
+</head>
+<body>
+    <header>
+        <img src="/public/images/webBankLogo.png" alt="Web Bank Logo">
+        <h1>Main page of your Web Bank account</h1>
+    </header>
+    <p>Welcome to Web Bank, {{username}}! <a href="/logout" id="logout-link">Logout</a></p>
+    <nav>
+        <ul>
+            {{#if clientAccounts.length}}
+                <li><input type="radio" id="balance" name="menuOption" value="balance"><label for="balance">Balance</label></li>
+                <li><input type="radio" id="deposit" name="menuOption" value="deposit"><label for="deposit">Deposit</label></li>
+                <li><input type="radio" id="withdrawal" name="menuOption" value="withdrawal"><label for="withdrawal">Withdrawal</label></li>
+                <li><input type="radio" id="openAccount" name="menuOption" value="openAccount"><label for="openAccount">Open an Account</label></li>
+                <li>
+                    <label for="menuAccountNumber">Select Account:</label>
+                    <select name="accountNumber" id="menuAccountNumber" disabled>
+                        <option value="" selected disabled>Select an Account</option>
+                        <!-- Add options for available accounts here -->
+                        {{#each clientAccounts}}
+                            <option value="{{this.number}}">{{this.type}} - {{this.number}}</option>
+                        {{/each}}
+                    </select>
+                </li>
+                <li>
+                    <button type="button" id="menuSubmitButton" disabled>Submit</button>
+                </li>
+            {{else}}
+                <li><input type="radio" id="balance" name="menuOption" value="balance" disabled><label for="balance">Balance</label></li>
+                <li><input type="radio" id="deposit" name="menuOption" value="deposit" disabled><label for="deposit">Deposit</label></li>
+                <li><input type="radio" id="withdrawal" name="menuOption" value="withdrawal" disabled><label for="withdrawal">Withdrawal</label></li>
+                <li><input type="radio" id="openAccount" name="menuOption" value="openAccount"><label for="openAccount">Open an Account</label></li>
+            {{/if}}
+        </ul>
+    </nav>
+    <form id="accountActionForm" action="/balance" method="get">
+  <label for="accountNumber">Select Account:</label>
+  <select name="accountNumber" id="menuAccountNumber" disabled>
+    {{#each clientAccounts}}
+    <option value="{{this.number}}">{{this.type}} - {{this.number}}</option>
+    {{/each}}
+  </select>
+  <span id="accountError" class="error-message"></span>
+  <button type="submit" id="menuSubmitButton" disabled>Submit</button>
+  {{#if successMessage}}
+  <div class="success-message">
+    <p>{{ successMessage }}</p>
+  </div>
+  {{/if}}
+</form>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          const form = document.getElementById('accountActionForm');
+          const accountNumberInput = document.getElementById('menuAccountNumber');
+          const errorMessage = document.getElementById('accountError');
+          const menuOptions = document.querySelectorAll('input[name="menuOption"]');
+          const submitButton = document.getElementById('menuSubmitButton');
+          const openAccountOption = document.getElementById('openAccount');
+
+          function toggleSubmitButton() {
+            const selectedOption = document.querySelector('input[name="menuOption"]:checked');
+            const accountNumber = accountNumberInput.value.trim();
+
+            if (selectedOption && ((selectedOption.value === 'openAccount' && accountNumber !== '') || accountNumber !== '')) {
+              submitButton.disabled = false;
+            } else {
+              submitButton.disabled = true;
+            }
+          }
+
+          menuOptions.forEach((option) => {
+            option.addEventListener('change', function (e) {
+              if (e.target.value === 'openAccount') {
+                accountNumberInput.disabled = false; // Disable account number input for Open Account
+                submitButton.disabled = false;
+                form.action = '/openAccount'; // Set form action to openAccount endpoint
+              } else {
+                accountNumberInput.disabled = false;
+                submitButton.disabled = true;
+                form.action = `/${e.target.value}`; // Set form action based on the selected option
+              }
+            });
+          });
+
+  form.addEventListener('submit', function (e) {
+    const selectedOption = document.querySelector('input[name="menuOption"]:checked').value;
+    const accountNumber = accountNumberInput.value.trim();
+
+    if (accountNumber === '' && selectedOption !== 'openAccount') {
+      e.preventDefault();
+      errorMessage.textContent = 'Please enter an account number.';
+      accountNumberInput.classList.add('input-error');
+    } else {
+      errorMessage.textContent = '';
+      accountNumberInput.classList.remove('input-error');
+
+      if (selectedOption === 'balance') {
+        e.preventDefault();
+        window.location.href = '/balance?accountNumber=' + encodeURIComponent(accountNumber);
+      } else if (selectedOption === 'deposit') {
+        e.preventDefault();
+        window.location.href = '/deposit?accountNumber=' + encodeURIComponent(accountNumber);
+      } else if (selectedOption === 'withdrawal') {
+        e.preventDefault();
+        window.location.href = '/withdrawal?accountNumber=' + encodeURIComponent(accountNumber);
+      } else if (selectedOption === 'openAccount') {
+        // Redirect to the page where you can open a new account
+        window.location.href = '/openAccount'; // Corrected the URL
+      }
+    }
+  });
+
+  menuOptions.forEach((option) => {
+    option.addEventListener('change', function (e) {
+      if (e.target.value === 'openAccount') {
+        accountNumberInput.disabled = false;
+        submitButton.disabled = true;
+      } else {
+        accountNumberInput.disabled = true;
+        accountNumberInput.value = '';
+        submitButton.disabled = false;
+      }
+
+      toggleSubmitButton();
+    });
+  });
+
+  openAccountOption.addEventListener('change', function (e) {
+    if (e.target.checked) {
+      accountNumberInput.disabled = false;
+      submitButton.disabled = true;
+    }
+  });
+});
+
+
+</script>
+</body>
+</html>

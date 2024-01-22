@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--Student name: Bektursun Mashrapov-->
+<!--Student ID: 140309220-->
+<!--Student email: bmashrapov@myseneca.ca-->
+<!--Course: WEB322-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/public/styleOpenAccount.css">
+    <title>Web Bank Opening Account Page</title>
+</head>
+<body>
+    <header>
+        <img src="/public/images/webBankLogo.png" alt="Web Bank Logo">
+        <h1>Open a New Account</h1>
+    </header>
+    <p>Welcome, {{ username }}!</p>
+    {{#if errorMessage}}
+        <div class="error-message">
+            <p>Error: {{ errorMessage }}</p>
+        </div>
+    {{/if}}
+    <section class="openAccount-section">
+        <h2>Select an Account Type to Open</h2>
+        <form action="/openAccount" method="post">
+            <div>
+                <input type="radio" id="savingsAccount" name="accountType" value="Savings">
+                <label for="savingsAccount">Savings Account</label>
+            </div>
+            <div>
+                <input type="radio" id="chequingAccount" name="accountType" value="Chequing">
+                <label for="chequingAccount">Chequing Account</label>
+            </div>
+            <button type="submit" id="openAccountButton" disabled>Open Account</button>
+            <button type="button" id="cancelButton" onclick="cancelAccount()">Cancel</button>
+        </form>
+        <form action="/main" method="get">
+            <button type="submit">Return to Main Menu</button>
+        </form>
+    </section>
+</body>
+<script>
+    function cancelAccount() 
+    {
+        window.location.href = "/main";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () 
+    {
+        const savingsAccountRadio = document.getElementById("savingsAccount");
+        const chequingAccountRadio = document.getElementById("chequingAccount");
+        const openAccountButton = document.getElementById("openAccountButton");
+
+        openAccountButton.disabled = true;
+
+        savingsAccountRadio.addEventListener("change", function () 
+        {
+            openAccountButton.disabled = false;
+        });
+
+        chequingAccountRadio.addEventListener("change", function () 
+        {
+            openAccountButton.disabled = false;
+        });
+    });
+</script>
+
+</html>
